@@ -275,8 +275,51 @@ a:hover { text-decoration: underline; }
 }
 .res-note { color: var(--text-faint); font-size: 0.8rem; }
 
-/* ===== EMPTY STATE ===== */
-.empty { text-align: center; color: var(--text-faint); padding: 40px 20px; grid-column: 1 / -1; font-size: 0.95rem; }
+/* ===== INSTALACIÓN ===== */
+.install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 26px; }
+.step-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px; position: relative; transition: transform 0.18s, border-color 0.18s;
+}
+.step-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+.step-num {
+  position: absolute; top: -12px; left: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--grad); color: #fff; font-weight: 700; font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(108, 140, 255, 0.4);
+}
+.step-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin: 10px 0 8px; }
+.step-text { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+.step-code {
+  font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-3);
+  background: rgba(7, 11, 22, 0.7); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px; word-break: break-all; line-height: 1.5;
+}
+.install-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+.install-prompt-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px; max-width: 860px; margin: 0 auto;
+}
+.install-prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.install-prompt-head h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; }
+.install-prompt {
+  position: relative; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6;
+  color: var(--text-dim); background: rgba(7, 11, 22, 0.7); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; max-height: 320px; overflow-y: auto;
+  white-space: pre-wrap; word-break: break-word;
+}
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 999px; border: 1px solid var(--border-strong);
+  background: var(--bg-card); color: var(--text-dim); font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.copy-btn:hover { color: var(--text); border-color: var(--accent); background: rgba(108, 140, 255, 0.1); }
+.install-note {
+  text-align: center; color: var(--text-faint); font-size: 0.82rem; margin-top: 22px;
+}
+.install-note a { color: var(--accent); }
 
 /* ===== FOOTER ===== */
 .footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }

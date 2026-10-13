@@ -61,6 +61,7 @@ vercel --prod     # deploy a producción
 | **Guion de llamada** | Tabla tarea → agente → prompt sugerido para invocar cada especialista |
 | **Skills** | 238 skills, agrupadas por dominio, con búsqueda y filtros |
 | **Seguridad** | Agentes de seguridad, runtime antimalware (sentinel), políticas y capas de defensa |
+| **Instalación** | Paso a paso de 3 pasos para instalar los 56 agentes en Mac/Windows + prompt de autoinstalación copiable |
 | **Recursos** | Paquetes y comandos para que OpenCode funcione bien en **macOS** y **Windows** |
 
 ---

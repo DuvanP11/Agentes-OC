@@ -28,6 +28,7 @@
         <a href="#skills">Skills</a>
         <a href="#seguridad">Seguridad</a>
         <a href="#recursos">Recursos</a>
+        <a href="#instalacion">Instalación</a>
       </div>
     </div>
   </nav>
@@ -248,6 +249,68 @@ flowchart TB
       </div>
     </section>
 
+  <!-- ===== INSTALACIÓN ===== -->
+    <section class="section" id="instalacion">
+      <div class="section-head">
+        <p class="section-tag">Paquete instalable</p>
+        <h2>Cómo instalar todo</h2>
+        <p class="section-sub">Este repo incluye las definiciones reales de los <strong>56 agentes</strong> (7 primarios + 49 subagentes) y un instalador para macOS, Linux y Windows. No borra tus agentes existentes: hace backup y fusiona.</p>
+      </div>
+
+      <div class="install-grid">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <h3 class="step-title">Clona el paquete</h3>
+          <p class="step-text">Descarga el repo con las definiciones y los instaladores.</p>
+          <code class="step-code">git clone https://github.com/DuvanP11/Agentes-OC.git ~/dev/Agentes-OC<br/>cd ~/dev/Agentes-OC</code>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <h3 class="step-title">Instala los 56 agentes</h3>
+          <p class="step-text">El instalador crea un backup de tu config y agrega los agentes sin sobrescribir los tuyos.</p>
+          <code class="step-code"># macOS / Linux<br/>bash install.sh<br/><br/># Windows<br/>powershell -ExecutionPolicy Bypass -File install.ps1</code>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <h3 class="step-title">Verifica</h3>
+          <p class="step-text">Confirma que todos los agentes quedaron cargados en tu OpenCode.</p>
+          <code class="step-code">opencode agent list</code>
+        </div>
+      </div>
+
+      <div class="install-actions">
+        <a href="https://github.com/DuvanP11/Agentes-OC/blob/main/COMO_INSTALAR.md" class="btn btn-ghost" target="_blank" rel="noopener">📖 Guía completa paso a paso</a>
+        <a href="https://github.com/DuvanP11/Agentes-OC" class="btn btn-primary" target="_blank" rel="noopener">⬇️ Ver el repositorio</a>
+      </div>
+
+      <div class="install-prompt-card">
+        <div class="install-prompt-head">
+          <h3>🤖 O autoinstalación con un prompt</h3>
+          <button class="copy-btn" data-copy="installPrompt">📋 Copiar prompt</button>
+        </div>
+        <p class="section-sub" style="margin-bottom:14px;">Pega este prompt en OpenCode (en la máquina nueva): detecta el SO, instala lo que falte, clona el repo, ejecuta el instalador, agrega el plugin de memoria y el MCP docling, y verifica el resultado.</p>
+        <pre class="install-prompt" id="installPrompt">Actúa como instalador del paquete Agentes-OC. Ejecuta este plan completo y verifica cada paso con evidencia real (salida de comandos):
+
+1. DETECTA el sistema operativo (macOS, Windows o Linux) con uname o ver.
+2. VERIFICA e INSTALA los prerrequisitos que falten: git, node (LTS), python3, jq, gh (GitHub CLI).
+   - En macOS usa Homebrew (brew install ...). Si Homebrew no existe, instálalo.
+   - En Windows usa winget (winget install ...).
+   - En Linux usa el gestor nativo (apt/dnf/pacman).
+   No instales nada que ya esté instalado. Muestra qué instalaste y qué ya existía.
+3. VERIFICA si OpenCode está instalado (opencode --version). Si no, instálalo con el instalador oficial (macOS/Linux: descarga a /tmp y ejecuta con bash; Windows: instalador de PowerShell). Verifica con opencode --version.
+4. CLONA el repo https://github.com/DuvanP11/Agentes-OC.git en ~/dev/Agentes-OC (si ya existe, haz git pull).
+5. EJECUTA el instalador de agentes: macOS/Linux bash install.sh, Windows powershell -ExecutionPolicy Bypass -File install.ps1. Verifica que el backup se creó y que opencode.json contiene los agentes.
+6. INSTALA el plugin de memoria: opencode plugin @cioffi_ai/opencode-memory.
+7. INSTALA el MCP docling si es posible (pip install docling-mcp-server).
+8. VERIFICA el resultado final: opencode agent list debe mostrar director, fullstack-product-engineer, security-engineer, security-reviewer y los demás. Cuenta cuántos agentes quedaron instalados.
+9. ENTREGA un resumen final con: SO detectado, prerrequisitos instalados, versión de OpenCode, número de agentes instalados y cualquier paso que requiriera acción manual.
+
+Regla de seguridad: no ejecutes nada destructivo, no borres configuraciones existentes sin backup, y si un paso requiere sudo/administrador pídelo al usuario.</pre>
+      </div>
+
+      <p class="install-note">Archivos del paquete: <code>agents/</code> (56 definiciones JSON + MD) · <code>install.sh</code> · <code>install.ps1</code> · <code>scripts/export-agents.sh</code> (regenera el paquete desde tu OpenCode).</p>
+    </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -283,5 +346,33 @@ flowchart TB
   <script src="js/data.js"></script>
   <script src="js/skills.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    document.querySelectorAll("[data-copy]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const el = document.getElementById(btn.dataset.copy);
+        if (!el) return;
+        const text = el.innerText.replace(/\n{3,}/g, "\n\n").trim();
+        const done = () => {
+          const prev = btn.innerHTML;
+          btn.innerHTML = "✅ ¡Copiado!";
+          setTimeout(() => { btn.innerHTML = prev; }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, el, done));
+        } else {
+          fallbackCopy(text, el, done);
+        }
+      });
+    });
+    function fallbackCopy(text, el, done) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  </script>
 </body>
 </html>
