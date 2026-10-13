@@ -1,12 +1,34 @@
 # Agentes-OC
 
-**Paquete de Agentes y SubAgentes IA para complementar OpenCode** — sitio web visual con el inventario completo de tu ecosistema: agentes, subagentes, skills, seguridad, plugins, MCP y el guion de llamada por tarea.
+**Paquete de Agentes y SubAgentes IA para OpenCode** — sitio web visual con el inventario completo de tu ecosistema (agentes, subagentes, skills, seguridad, plugins, MCP, guion de llamada) **+ paquete instalable** de los 56 agentes para cualquier Mac o Windows.
 
-![Stack](https://img.shields.io/badge/stack-HTML%20%2B%20CSS%20%2B%20JS-6c8cff) ![Vercel](https://img.shields.io/badge/deploy-Vercel-000000) ![OpenCode](https://img.shields.io/badge/OpenCode-1.19.0-38d9a9)
+![Stack](https://img.shields.io/badge/stack-HTML%20%2B%20CSS%20%2B%20JS-6c8cff) ![Vercel](https://img.shields.io/badge/deploy-Vercel-000000) ![OpenCode](https://img.shields.io/badge/OpenCode-1.19.0-38d9a9) ![Agentes](https://img.shields.io/badge/agentes-56-9d6cff)
 
 ---
 
-## 🚀 Desplegar en Vercel
+## 📥 Cómo instalar (nuevo)
+
+- **📖 Guía completa paso a paso** (macOS + Windows + prompt de autoinstalación): lee **[`COMO_INSTALAR.md`](COMO_INSTALAR.md)**.
+- **🚀 Instalación rápida** en tu máquina actual:
+
+```bash
+# 1. Clona el repo
+git clone https://github.com/DuvanP11/Agentes-OC.git ~/dev/Agentes-OC
+cd ~/dev/Agentes-OC
+
+# 2. Instala los 56 agentes (hace backup de tu config primero)
+bash install.sh               # macOS / Linux
+powershell -ExecutionPolicy Bypass -File install.ps1   # Windows
+
+# 3. Verifica
+opencode agent list
+```
+
+> El instalador **no borra** tus agentes existentes: hace backup y fusiona los del paquete.
+
+---
+
+## 🚀 Desplegar la web en Vercel
 
 El sitio es **100% estático** (HTML + CSS + JS, sin build). Conectarlo a Vercel toma menos de 2 minutos:
 
@@ -14,8 +36,9 @@ El sitio es **100% estático** (HTML + CSS + JS, sin build). Conectarlo a Vercel
 
 1. Ve a [vercel.com/new](https://vercel.com/new).
 2. Importa el repositorio `DuvanP11/Agentes-OC` (conecta tu cuenta de GitHub si no lo está).
-3. Vercel detecta automáticamente que es un proyecto estático (framework: **Other**).
-4. Haz clic en **Deploy**. Listo: obtienes una URL `https://agentes-oc.vercel.app`.
+3. **Importante:** el nombre del proyecto no puede llevar mayúsculas → usa **`agentes-oc`** (o renombra el repo a `agentes-oc`).
+4. Vercel detecta automáticamente que es un proyecto estático (framework: **Other**).
+5. Haz clic en **Deploy**. Listo: obtienes una URL `https://agentes-oc.vercel.app`.
 
 ### Opción B — Desde la CLI de Vercel
 
@@ -24,12 +47,6 @@ npm i -g vercel
 vercel            # primer deploy (preview)
 vercel --prod     # deploy a producción
 ```
-
-### Opción C — Conectar repo existente
-
-1. En Vercel: **Add New → Project** → importa `DuvanP11/Agentes-OC`.
-2. Framework preset: **Other** (no requiere build command ni output directory).
-3. Deploy. Cada `git push` a `main` genera un deploy automático.
 
 > No se necesitan variables de entorno ni funciones serverless: es un sitio estático puro.
 
@@ -40,11 +57,33 @@ vercel --prod     # deploy a producción
 | Sección | Qué muestra |
 |---|---|
 | **Esquema** | Diagrama visual (Mermaid) del ecosistema: director → equipo de producto → especialistas → build → revisión → seguridad |
-| **Agentes** | 49 subagentes + 7 primarios con descripción, categoría y cuándo usarlos. Filtros por categoría y búsqueda |
+| **Agentes** | 56 agentes (7 primarios + 49 subagentes) con descripción, categoría y cuándo usarlos. Filtros y búsqueda |
 | **Guion de llamada** | Tabla tarea → agente → prompt sugerido para invocar cada especialista |
-| **Skills** | Las ~150 skills instaladas, agrupadas por dominio, con búsqueda y filtros |
+| **Skills** | 238 skills, agrupadas por dominio, con búsqueda y filtros |
 | **Seguridad** | Agentes de seguridad, runtime antimalware (sentinel), políticas y capas de defensa |
 | **Recursos** | Paquetes y comandos para que OpenCode funcione bien en **macOS** y **Windows** |
+
+---
+
+## 📦 Paquete de agentes instalable
+
+El repo incluye las definiciones reales (exportadas desde OpenCode) de los **56 agentes**:
+
+```
+agents/
+├── manifest.json              # Índice del paquete
+├── <agente>.json              # Definición limpia (name, mode, description, temperature, tools, prompt)
+└── <agente>.md                # Versión legible (documentación)
+```
+
+### Regenerar el paquete desde tu OpenCode
+
+Si modificas agentes y quieres actualizar el paquete:
+
+```bash
+bash scripts/export-agents.sh
+git add agents/ && git commit -m "chore: actualizar paquete de agentes" && git push
+```
 
 ---
 
@@ -82,23 +121,13 @@ winget install GitHub.cli
 pip install semgrep
 ```
 
-### Configuración clave
-
-| Ruta | Qué es |
-|---|---|
-| `~/.config/opencode/opencode.json` | Config principal: agentes, plugins, MCP, permisos |
-| `~/.config/opencode/agent/` | Definiciones de agentes |
-| `~/.config/opencode/skills/` | Skills instaladas (`SKILL.md` por carpeta) |
-| `~/.config/opencode/plugins/` | Plugins locales (`security-agent.ts`, `ecc-hooks.ts`, …) |
-| `~/.config/opencode/AGENTS.md` | Instrucciones globales del entorno |
-
 ---
 
 ## 🔒 Seguridad incluida
 
 - **`security-engineer`** — subagente AppSec integral (código, dependencias, secretos, auth, skills/MCP, CI/CD).
 - **`security-reviewer`** — revisión focalizada post-diff.
-- **Runtime antimalware** — plugin `security-agent.ts` + hooks Python `sentinel_preflight.py` / `sentinel_postflight.py` + `skill_scanner.py` + `skill_validator.py` + IOCs firmados.
+- **Runtime antimalware** — plugin `security-agent.ts` + hooks Python (`sentinel_preflight.py` / `sentinel_postflight.py` / `skill_scanner.py` / `skill_validator.py`) + IOCs firmados.
 - **Puertas de seguridad** en `director` y `fullstack-product-engineer` antes de aceptar entregables.
 
 ---
@@ -108,6 +137,12 @@ pip install semgrep
 ```
 Agentes-OC/
 ├── index.html          # Página principal (esquema + secciones)
+├── COMO_INSTALAR.md    # Guía paso a paso (Mac/Windows) + prompt de autoinstalación
+├── install.sh          # Instalador de agentes (macOS/Linux)
+├── install.ps1         # Instalador de agentes (Windows)
+├── agents/             # Paquete de 56 agentes (JSON + MD + manifest)
+├── scripts/
+│   └── export-agents.sh# Regenera el paquete desde tu OpenCode
 ├── css/styles.css      # Tema oscuro profesional
 ├── js/data.js          # Inventario: agentes, guion, seguridad, plugins, MCP, recursos
 ├── js/skills.js        # Inventario de skills

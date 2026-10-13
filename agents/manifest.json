@@ -1,0 +1,342 @@
+{
+  "total": 56,
+  "generated": "2026-10-12",
+  "agents": [
+    {
+      "name": "architect",
+      "mode": "subagent",
+      "description": "Software architecture specialist for system design, scalability, and technical decision-making.",
+      "file": "architect.json"
+    },
+    {
+      "name": "automation-engineer",
+      "mode": "subagent",
+      "description": "Ingeniero de automatizacion: integraciones, procesos automaticos, webhooks, tareas programadas y conectores.",
+      "file": "automation-engineer.json"
+    },
+    {
+      "name": "backend-developer",
+      "mode": "subagent",
+      "description": "Desarrollador backend senior: APIs, logica empresarial, autenticacion, autorizacion, integraciones y servicios.",
+      "file": "backend-developer.json"
+    },
+    {
+      "name": "build-error-resolver",
+      "mode": "subagent",
+      "description": "Build and TypeScript error resolution specialist. Use when build fails or type errors occur. Fixes build/type errors onl",
+      "file": "build-error-resolver.json"
+    },
+    {
+      "name": "build",
+      "mode": "primary",
+      "description": "Primary coding agent for development work",
+      "file": "build.json"
+    },
+    {
+      "name": "code-reviewer",
+      "mode": "subagent",
+      "description": "Expert code review specialist. Reviews code for quality, security, and maintainability. Use immediately after writing or",
+      "file": "code-reviewer.json"
+    },
+    {
+      "name": "commercial-director",
+      "mode": "subagent",
+      "description": "Director comercial IA de ventas y rentabilidad. Estrategia comercial, segmentos, prospeccion, tarifas, margenes y escena",
+      "file": "commercial-director.json"
+    },
+    {
+      "name": "compaction",
+      "mode": "primary",
+      "description": "",
+      "file": "compaction.json"
+    },
+    {
+      "name": "cpp-build-resolver",
+      "mode": "subagent",
+      "description": "C++ build, CMake, and compilation error resolution specialist. Fixes build errors, linker issues, and template errors wi",
+      "file": "cpp-build-resolver.json"
+    },
+    {
+      "name": "cpp-reviewer",
+      "mode": "subagent",
+      "description": "Expert C++ code reviewer specializing in memory safety, modern C++ idioms, concurrency, and performance. Use for all C++",
+      "file": "cpp-reviewer.json"
+    },
+    {
+      "name": "crm-builder",
+      "mode": "subagent",
+      "description": "Constructor de CRM: clientes, contactos, empresas, oportunidades, embudos, actividades, tareas, permisos y reportes. Mod",
+      "file": "crm-builder.json"
+    },
+    {
+      "name": "data-analyst",
+      "mode": "subagent",
+      "description": "Analista de datos y negocio. Analiza CSV/Excel y datos tabulares, crea y valida SQL, detecta anomalias y tendencias, cal",
+      "file": "data-analyst.json"
+    },
+    {
+      "name": "database-architect",
+      "mode": "subagent",
+      "description": "Arquitecto de base de datos: SQL, PostgreSQL, MySQL, SQLite, modelado, migraciones e indices.",
+      "file": "database-architect.json"
+    },
+    {
+      "name": "database-reviewer",
+      "mode": "subagent",
+      "description": "PostgreSQL database specialist for query optimization, schema design, security, and performance. Incorporates Supabase b",
+      "file": "database-reviewer.json"
+    },
+    {
+      "name": "devops-developer",
+      "mode": "subagent",
+      "description": "Desarrollador DevOps: contenedores, variables de entorno, compilacion, CI/CD y despliegue.",
+      "file": "devops-developer.json"
+    },
+    {
+      "name": "director",
+      "mode": "primary",
+      "description": "Orquestador y director general del ecosistema multiagente. Analiza la solicitud, la descompone en tareas, selecciona y d",
+      "file": "director.json"
+    },
+    {
+      "name": "doc-analyst",
+      "mode": "subagent",
+      "description": "Analista de documentos e imagenes. Extrae y estructura informacion de PDF, DOCX, XLSX, CSV, capturas, diagramas y docume",
+      "file": "doc-analyst.json"
+    },
+    {
+      "name": "doc-updater",
+      "mode": "subagent",
+      "description": "Documentation and codemap specialist. Use for updating codemaps and documentation.",
+      "file": "doc-updater.json"
+    },
+    {
+      "name": "docs-lookup",
+      "mode": "subagent",
+      "description": "Documentation specialist using Context7 MCP to fetch current library and API documentation with code examples.",
+      "file": "docs-lookup.json"
+    },
+    {
+      "name": "doctor",
+      "mode": "subagent",
+      "description": "Doctor del sistema y de OpenCode. Diagnostica SO, version y configuracion de OpenCode, dependencias, plugins, MCP, model",
+      "file": "doctor.json"
+    },
+    {
+      "name": "e2e-runner",
+      "mode": "subagent",
+      "description": "End-to-end testing specialist using Playwright. Generates, maintains, and runs E2E tests for critical user flows.",
+      "file": "e2e-runner.json"
+    },
+    {
+      "name": "engineer",
+      "mode": "subagent",
+      "description": "Ingeniero universal de software. Desarrolla, depura y refactoriza en SQL, Python, Ruby, JS/TS, React/Next, Node, C/C++, ",
+      "file": "engineer.json"
+    },
+    {
+      "name": "explore",
+      "mode": "subagent",
+      "description": "Fast agent specialized for exploring codebases. Use this when you need to quickly find files by patterns (eg. \"src/compo",
+      "file": "explore.json"
+    },
+    {
+      "name": "frontend-developer",
+      "mode": "subagent",
+      "description": "Desarrollador frontend senior: React, Next.js, HTML, CSS, JavaScript, TypeScript y tecnologias compatibles.",
+      "file": "frontend-developer.json"
+    },
+    {
+      "name": "fullstack-product-engineer",
+      "mode": "primary",
+      "description": "Ingeniero de producto full-stack senior y coordinador del equipo de producto. Construye productos digitales completos (w",
+      "file": "fullstack-product-engineer.json"
+    },
+    {
+      "name": "general",
+      "mode": "subagent",
+      "description": "General-purpose agent for researching complex questions and executing multi-step tasks. Use this agent to execute multip",
+      "file": "general.json"
+    },
+    {
+      "name": "go-build-resolver",
+      "mode": "subagent",
+      "description": "Go build, vet, and compilation error resolution specialist. Fixes Go build errors with minimal changes.",
+      "file": "go-build-resolver.json"
+    },
+    {
+      "name": "go-reviewer",
+      "mode": "subagent",
+      "description": "Expert Go code reviewer specializing in idiomatic Go, concurrency patterns, error handling, and performance.",
+      "file": "go-reviewer.json"
+    },
+    {
+      "name": "harness-optimizer",
+      "mode": "subagent",
+      "description": "Analyze and improve the local agent harness configuration for reliability, cost, and throughput.",
+      "file": "harness-optimizer.json"
+    },
+    {
+      "name": "improvement",
+      "mode": "subagent",
+      "description": "Especialista en mejora continua y optimizacion de procesos. Cuellos de botella, causa raiz (5 porques, Ishikawa), automa",
+      "file": "improvement.json"
+    },
+    {
+      "name": "java-build-resolver",
+      "mode": "subagent",
+      "description": "Java/Maven/Gradle build, compilation, and dependency error resolution specialist. Fixes build errors with minimal change",
+      "file": "java-build-resolver.json"
+    },
+    {
+      "name": "java-reviewer",
+      "mode": "subagent",
+      "description": "Expert Java and Spring Boot code reviewer specializing in layered architecture, JPA patterns, security, and concurrency.",
+      "file": "java-reviewer.json"
+    },
+    {
+      "name": "kotlin-build-resolver",
+      "mode": "subagent",
+      "description": "Kotlin/Gradle build, compilation, and dependency error resolution specialist. Fixes Kotlin build errors with minimal cha",
+      "file": "kotlin-build-resolver.json"
+    },
+    {
+      "name": "kotlin-reviewer",
+      "mode": "subagent",
+      "description": "Kotlin and Android/KMP code reviewer. Reviews Kotlin code for idiomatic patterns, coroutine safety, Compose best practic",
+      "file": "kotlin-reviewer.json"
+    },
+    {
+      "name": "loop-operator",
+      "mode": "subagent",
+      "description": "Operate autonomous agent loops, monitor progress, and intervene safely when loops stall.",
+      "file": "loop-operator.json"
+    },
+    {
+      "name": "media-producer",
+      "mode": "subagent",
+      "description": "Productor audiovisual. Guiones, storyboards, videos demo y tutoriales, subtitulos y voz; monta con Remotion/FFmpeg/Playw",
+      "file": "media-producer.json"
+    },
+    {
+      "name": "mobile-app-developer",
+      "mode": "subagent",
+      "description": "Desarrollador de apps moviles: Android nativo (Kotlin), Flutter y alternativas multiplataforma; compilacion y verificaci",
+      "file": "mobile-app-developer.json"
+    },
+    {
+      "name": "php-reviewer",
+      "mode": "subagent",
+      "description": "Expert PHP code reviewer specializing in PSR-12 compliance, PHP type system, Eloquent ORM patterns, security, and perfor",
+      "file": "php-reviewer.json"
+    },
+    {
+      "name": "plan",
+      "mode": "primary",
+      "description": "Plan mode. Disallows all edit tools.",
+      "file": "plan.json"
+    },
+    {
+      "name": "planner",
+      "mode": "subagent",
+      "description": "Expert planning specialist for complex features and refactoring. Use for implementation planning, architectural changes,",
+      "file": "planner.json"
+    },
+    {
+      "name": "product-architect",
+      "mode": "subagent",
+      "description": "Arquitecto de producto: requisitos, arquitectura, decisiones tecnologicas y planificacion por fases (prototipo/MVP/produ",
+      "file": "product-architect.json"
+    },
+    {
+      "name": "project-manager",
+      "mode": "subagent",
+      "description": "Gerente de proyectos y organizacion. Divide proyectos en etapas y tareas, gestiona dependencias, prioridades, plazos y r",
+      "file": "project-manager.json"
+    },
+    {
+      "name": "python-reviewer",
+      "mode": "subagent",
+      "description": "Expert Python code reviewer specializing in PEP 8 compliance, Pythonic idioms, type hints, security, and performance.",
+      "file": "python-reviewer.json"
+    },
+    {
+      "name": "qa-engineer",
+      "mode": "subagent",
+      "description": "Ingeniero de QA: pruebas unitarias, integracion, navegador, flujos completos y regresiones.",
+      "file": "qa-engineer.json"
+    },
+    {
+      "name": "quality-auditor",
+      "mode": "subagent",
+      "description": "Auditor de calidad, seguridad y validacion. Revisor independiente que verifica codigo, configuraciones, pruebas, regresi",
+      "file": "quality-auditor.json"
+    },
+    {
+      "name": "refactor-cleaner",
+      "mode": "subagent",
+      "description": "Dead code cleanup and consolidation specialist. Use for removing unused code, duplicates, and refactoring.",
+      "file": "refactor-cleaner.json"
+    },
+    {
+      "name": "reports",
+      "mode": "subagent",
+      "description": "Informes, documentos y presentaciones. Genera informes (ejecutivo, tecnico, comercial, auditoria), DOCX, XLSX, CSV, PPTX",
+      "file": "reports.json"
+    },
+    {
+      "name": "rust-build-resolver",
+      "mode": "subagent",
+      "description": "Rust build, Cargo, and compilation error resolution specialist. Fixes Rust build errors with minimal changes.",
+      "file": "rust-build-resolver.json"
+    },
+    {
+      "name": "rust-reviewer",
+      "mode": "subagent",
+      "description": "Expert Rust code reviewer specializing in idiomatic Rust, ownership, lifetimes, concurrency, and performance.",
+      "file": "rust-reviewer.json"
+    },
+    {
+      "name": "security-engineer",
+      "mode": "subagent",
+      "description": "Ingeniero de seguridad de aplicaciones (AppSec) y ciberseguridad. Audita codigo y detecta vulnerabilidades, revisa depen",
+      "file": "security-engineer.json"
+    },
+    {
+      "name": "security-reviewer",
+      "mode": "subagent",
+      "description": "Revisor de seguridad de codigo focalizado (post-diff). Deteccion y remediacion de vulnerabilidades en cambios recientes ",
+      "file": "security-reviewer.json"
+    },
+    {
+      "name": "summary",
+      "mode": "primary",
+      "description": "",
+      "file": "summary.json"
+    },
+    {
+      "name": "tdd-guide",
+      "mode": "subagent",
+      "description": "Test-Driven Development specialist enforcing write-tests-first methodology. Use when writing new features, fixing bugs, ",
+      "file": "tdd-guide.json"
+    },
+    {
+      "name": "technical-documentation",
+      "mode": "subagent",
+      "description": "Redactor tecnico: documentacion de instalacion, uso, arquitectura y mantenimiento.",
+      "file": "technical-documentation.json"
+    },
+    {
+      "name": "title",
+      "mode": "primary",
+      "description": "",
+      "file": "title.json"
+    },
+    {
+      "name": "ui-ux-designer",
+      "mode": "subagent",
+      "description": "Disenador UX/UI: direccion visual, interfaces modernas, responsive, accesibilidad y estados de interfaz.",
+      "file": "ui-ux-designer.json"
+    }
+  ]
+}
