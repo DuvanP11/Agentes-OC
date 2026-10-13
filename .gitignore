@@ -1,0 +1,13 @@
+# Dependencias / build
+node_modules/
+.next/
+out/
+dist/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

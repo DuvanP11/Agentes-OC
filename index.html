@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentes-OC · Ecosistema OpenCode</title>
+  <meta name="description" content="Inventario visual del ecosistema de agentes, subagentes, skills y seguridad de OpenCode. Guion de llamada por tarea y recursos para Windows y macOS." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">◈</span>
+        <span class="brand-text">Agentes<em>-OC</em></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#esquema">Esquema</a>
+        <a href="#agentes">Agentes</a>
+        <a href="#guion">Guion de llamada</a>
+        <a href="#skills">Skills</a>
+        <a href="#seguridad">Seguridad</a>
+        <a href="#recursos">Recursos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">OpenCode v<span id="ocVersion">1.19.0</span> · Inventario verificado</p>
+      <h1>Tu ecosistema de <span class="grad">agentes</span>, <span class="grad">skills</span> y <span class="grad">seguridad</span></h1>
+      <p class="hero-sub">Mapa visual, guion de llamada por tarea y recursos listos para desplegar. Todo lo que vive en tu OpenCode, organizado y comprensible.</p>
+      <div class="hero-actions">
+        <a href="#esquema" class="btn btn-primary">Ver el esquema</a>
+        <a href="#guion" class="btn btn-ghost">¿A quién llamo?</a>
+      </div>
+      <div class="stats" id="statsGrid">
+        <div class="stat"><span class="stat-num" id="statPrimary">7</span><span class="stat-label">Agentes primarios</span></div>
+        <div class="stat"><span class="stat-num" id="statSub">49</span><span class="stat-label">Subagentes</span></div>
+        <div class="stat"><span class="stat-num" id="statSkills">150</span><span class="stat-label">Skills</span></div>
+        <div class="stat"><span class="stat-num" id="statPlugins">5</span><span class="stat-label">Plugins</span></div>
+        <div class="stat"><span class="stat-num" id="statMCP">1</span><span class="stat-label">Servidor MCP</span></div>
+        <div class="stat stat-sec"><span class="stat-num" id="statSec">6</span><span class="stat-label">Capas de seguridad</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== ESQUEMA ===== -->
+    <section class="section" id="esquema">
+      <div class="section-head">
+        <p class="section-tag">Mapa del ecosistema</p>
+        <h2>Esquema visual</h2>
+        <p class="section-sub">Cómo se organizan el director, el equipo de producto y los especialistas. Haz clic en un nodo para ir a su ficha.</p>
+      </div>
+      <div class="diagram-card">
+        <div class="mermaid" id="ecosystemDiagram">
+flowchart TB
+  subgraph ORQ["🎯 Orquestación"]
+    DIR["director<br/><small>Orquestador general</small>"]
+    FSE["fullstack-product-engineer<br/><small>Equipo de producto digital</small>"]
+  end
+
+  subgraph PROD["🛠️ Equipo de producto"]
+    PA["product-architect"]
+    UX["ui-ux-designer"]
+    FE["frontend-developer"]
+    BE["backend-developer"]
+    DBA["database-architect"]
+    CRM["crm-builder"]
+    MOB["mobile-app-developer"]
+    AUT["automation-engineer"]
+    QA["qa-engineer"]
+    DEV["devops-developer"]
+    TD["technical-documentation"]
+  end
+
+  subgraph ESP["⚙️ Especialistas directos"]
+    ENG["engineer"]
+    EXP["explore"]
+    GEN["general"]
+    PM["project-manager"]
+    PL["planner"]
+    DA["data-analyst"]
+    DOC["doc-analyst"]
+    REP["reports"]
+    CD["commercial-director"]
+    IMP["improvement"]
+    MED["media-producer"]
+    DOCU["doc-updater"]
+    DT["doctor"]
+    QA2["quality-auditor"]
+  end
+
+  subgraph BUILD["🔧 Build & Resolución"]
+    BER["build-error-resolver"]
+    CBR["cpp-build-resolver"]
+    GBR["go-build-resolver"]
+    JBR["java-build-resolver"]
+    KBR["kotlin-build-resolver"]
+    RBR["rust-build-resolver"]
+  end
+
+  subgraph REV["🔍 Revisión de código"]
+    CR["code-reviewer"]
+    CPR["cpp-reviewer"]
+    GR["go-reviewer"]
+    JR["java-reviewer"]
+    KR["kotlin-reviewer"]
+    PHR["php-reviewer"]
+    PYR["python-reviewer"]
+    RR["rust-reviewer"]
+    DBR["database-reviewer"]
+  end
+
+  subgraph SEC["🛡️ Seguridad"]
+    SE["security-engineer"]
+    SR["security-reviewer"]
+    SA["security-agent (skill)"]
+    RT["Runtime sentinel<br/><small>preflight · postflight · scanner · IOCs</small>"]
+  end
+
+  DIR --> FSE
+  DIR --> ESP
+  DIR --> BUILD
+  DIR --> REV
+  DIR --> SEC
+  FSE --> PROD
+  FSE --> SEC
+  SE --> SR
+  SE --> SA
+  SE --> RT
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AGENTES ===== -->
+    <section class="section" id="agentes">
+      <div class="section-head">
+        <p class="section-tag">Catálogo</p>
+        <h2>Agentes y subagentes</h2>
+        <p class="section-sub">49 subagentes especializados + 7 agentes primarios. Filtra por categoría o busca por nombre.</p>
+      </div>
+
+      <div class="controls">
+        <input type="search" id="agentSearch" class="search" placeholder="Buscar agente… (ej: security, frontend, data)" />
+        <div class="chips" id="agentChips"></div>
+      </div>
+
+      <div class="agent-grid" id="agentGrid"></div>
+    </section>
+
+    <!-- ===== GUION ===== -->
+    <section class="section" id="guion">
+      <div class="section-head">
+        <p class="section-tag">Playbook</p>
+        <h2>Guion de llamada por tarea</h2>
+        <p class="section-sub">¿Qué necesitas? Encuentra el agente correcto y el prompt sugerido para invocarlo.</p>
+      </div>
+      <div class="controls">
+        <input type="search" id="scriptSearch" class="search" placeholder="Buscar tarea… (ej: seguridad, informe, build)" />
+      </div>
+      <div class="script-list" id="scriptList"></div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <div class="section-head">
+        <p class="section-tag">Capacidades</p>
+        <h2>Skills instaladas</h2>
+        <p class="section-sub">Todas las skills disponibles en tu entorno, agrupadas por dominio.</p>
+      </div>
+      <div class="controls">
+        <input type="search" id="skillSearch" class="search" placeholder="Buscar skill… (ej: seguridad, video, postgres)" />
+        <div class="chips" id="skillChips"></div>
+      </div>
+      <div class="skill-grid" id="skillGrid"></div>
+    </section>
+
+    <!-- ===== SEGURIDAD ===== -->
+    <section class="section" id="seguridad">
+      <div class="section-head">
+        <p class="section-tag">Protección activa</p>
+        <h2>Capas de seguridad</h2>
+        <p class="section-sub">Agentes de seguridad, runtime antimalware y políticas que protegen tu entorno.</p>
+      </div>
+
+      <div class="sec-grid">
+        <div class="sec-col">
+          <h3 class="sec-title">🛡️ Agentes de seguridad</h3>
+          <div id="secAgents"></div>
+        </div>
+        <div class="sec-col">
+          <h3 class="sec-title">⚡ Runtime antimalware</h3>
+          <div id="secRuntime"></div>
+        </div>
+      </div>
+
+      <div class="sec-layers">
+        <h3 class="sec-title">🧱 Políticas y capas de defensa</h3>
+        <ul id="secLayers"></ul>
+      </div>
+
+      <div class="sec-grid">
+        <div class="sec-col">
+          <h3 class="sec-title">🔌 Plugins activos</h3>
+          <div id="pluginList"></div>
+        </div>
+        <div class="sec-col">
+          <h3 class="sec-title">🔗 Servidores MCP</h3>
+          <div id="mcpList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECURSOS ===== -->
+    <section class="section" id="recursos">
+      <div class="section-head">
+        <p class="section-tag">Setup</p>
+        <h2>Recursos y paquetes para OpenCode</h2>
+        <p class="section-sub">Todo lo necesario para que el ecosistema funcione bien en macOS y Windows.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="mac">🍎 macOS</button>
+        <button class="tab" data-tab="windows">🪟 Windows</button>
+        <button class="tab" data-tab="config">📁 Configuración</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-mac">
+        <div class="res-list" id="resMac"></div>
+      </div>
+      <div class="tab-panel" id="tab-windows">
+        <div class="res-list" id="resWindows"></div>
+      </div>
+      <div class="tab-panel" id="tab-config">
+        <div class="res-list" id="resConfig"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p><strong>Agentes-OC</strong> · Inventario del ecosistema OpenCode v<span id="footerVersion">1.19.0</span></p>
+      <p class="footer-meta">Generado el <span id="footerDate">2026-10-12</span> · Desplegable en Vercel · <a href="https://github.com/DuvanP11/Agentes-OC" target="_blank" rel="noopener">github.com/DuvanP11/Agentes-OC</a></p>
+    </div>
+  </footer>
+
+  <!-- Mermaid para el esquema -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "dark",
+      themeVariables: {
+        darkMode: true,
+        background: "#0b1020",
+        primaryColor: "#1a2340",
+        primaryTextColor: "#e6ecff",
+        primaryBorderColor: "#3b4a8a",
+        secondaryColor: "#14203a",
+        tertiaryColor: "#0f1a33",
+        lineColor: "#5a6bb0",
+        fontSize: "14px",
+        fontFamily: "Inter, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 40, rankSpacing: 50, htmlLabels: true },
+      securityLevel: "loose"
+    });
+  </script>
+  <script src="js/data.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
