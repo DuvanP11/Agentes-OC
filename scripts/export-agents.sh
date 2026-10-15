@@ -22,9 +22,12 @@ fi
 
 OPCODE="$(command -v opencode)"
 
-# Listar agentes
+# Listar agentes (NOTA: la salida va primero a un archivo porque al canalizar
+# `opencode agent list | grep` directamente la tubería trunca la salida y solo
+# llegan ~15 nombres; con redirección a archivo se obtienen los N completos).
 echo "📋 Listando agentes…"
-AGENTS="$($OPCODE agent list 2>/dev/null | grep -E '^\s*[a-z][a-z0-9-]*\s*\(' | awk '{print $1}' | sort -u)"
+$OPCODE agent list 2>/dev/null > "$TMP_DIR/list.txt" || true
+AGENTS="$(grep -E '^\s*[a-z][a-z0-9-]*\s*\(' "$TMP_DIR/list.txt" | awk '{print $1}' | sort -u)"
 
 if [ -z "$AGENTS" ]; then
   echo "❌ No se pudieron listar agentes." >&2
@@ -41,13 +44,19 @@ done
 
 echo "✅ Exportados $COUNT agentes a $TMP_DIR"
 
+LISTED=$(printf '%s\n' $AGENTS | wc -l | tr -d ' ')
+if [ "$COUNT" -ne "$LISTED" ]; then
+  echo "⚠️ Se exportaron $COUNT de $LISTED agentes listados. Revisa los fallos de 'opencode debug agent'." >&2
+fi
+
 # Procesar a formato limpio
 mkdir -p "$AGENTS_DIR"
-python3 << PYEOF
+export TMP_DIR AGENTS_DIR
+python3 << 'PYEOF'
 import json, os, glob
 
-SRC = "$TMP_DIR"
-DST = "$AGENTS_DIR"
+SRC = os.environ["TMP_DIR"]
+DST = os.environ["AGENTS_DIR"]
 manifest = []
 
 for f in sorted(glob.glob(os.path.join(SRC, "*.json"))):
@@ -97,7 +106,7 @@ for f in sorted(glob.glob(os.path.join(SRC, "*.json"))):
     })
 
 with open(os.path.join(DST, "manifest.json"), "w") as out:
-    json.dump({"total": len(manifest), "generated": "2026-10-12", "agents": manifest}, out, indent=2, ensure_ascii=False)
+    json.dump({"total": len(manifest), "generated": __import__("datetime").date.today().isoformat(), "agents": manifest}, out, indent=2, ensure_ascii=False)
 
 print(f"✅ Paquete regenerado: {len(manifest)} agentes en {DST}")
 PYEOF

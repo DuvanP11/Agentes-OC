@@ -1,16 +1,16 @@
 /* ============================================================
    Agentes-OC · Inventario del ecosistema OpenCode
-   Datos verificados al 2026-10-12 desde `opencode agent list`,
-   `opencode debug config` y la memoria del proyecto.
+   Datos verificados al 2026-10-15 desde `opencode agent list`,
+   `opencode debug skill`, `opencode debug config` y `opencode mcp list`.
    ============================================================ */
 
 const INVENTORY = {
-  generatedAt: "2026-10-12",
+  generatedAt: "2026-10-15",
   opencodeVersion: "1.19.0",
   stats: {
     primaryAgents: 7,
     subagents: 49,
-    skills: 238,
+    skills: 237,
     plugins: 5,
     mcpServers: 1,
     securityLayers: 6

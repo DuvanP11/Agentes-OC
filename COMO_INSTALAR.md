@@ -87,7 +87,7 @@ opencode plugin @cioffi_ai/opencode-memory
 pip3 install docling-mcp-server
 ```
 
-> 💡 **Nota**: las ~238 skills de tu entorno actual provienen del ecosistema ECC.
+> 💡 **Nota**: las ~237 skills de tu entorno actual provienen del ecosistema ECC.
 > Para replicarlas en otra máquina, copia la carpeta `skills` de tu config de
 > OpenCode o reinstala ECC. El catálogo completo está en la web (`js/skills.js`)
 > y en la sección Skills del sitio.

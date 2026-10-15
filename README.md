@@ -59,7 +59,7 @@ vercel --prod     # deploy a producción
 | **Esquema** | Diagrama visual (Mermaid) del ecosistema: director → equipo de producto → especialistas → build → revisión → seguridad |
 | **Agentes** | 56 agentes (7 primarios + 49 subagentes) con descripción, categoría y cuándo usarlos. Filtros y búsqueda |
 | **Guion de llamada** | Tabla tarea → agente → prompt sugerido para invocar cada especialista |
-| **Skills** | 238 skills, agrupadas por dominio, con búsqueda y filtros |
+| **Skills** | 237 skills, agrupadas por dominio, con búsqueda y filtros |
 | **Seguridad** | Agentes de seguridad, runtime antimalware (sentinel), políticas y capas de defensa |
 | **Instalación** | Paso a paso de 3 pasos para instalar los 56 agentes en Mac/Windows + prompt de autoinstalación copiable |
 | **Recursos** | Paquetes y comandos para que OpenCode funcione bien en **macOS** y **Windows** |

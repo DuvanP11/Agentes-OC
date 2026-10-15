@@ -1,6 +1,6 @@
 /* ============================================================
    Agentes-OC · Inventario de SKILLS disponibles en el entorno
-   (fuente: catálogo de skills cargado por OpenCode al 2026-10-12)
+   (fuente: catálogo de skills cargado por OpenCode al 2026-10-15)
    ============================================================ */
 
 const SKILLS = [
@@ -78,7 +78,6 @@ const SKILLS = [
   { name: "token-budget-advisor", cat: "Agentes", desc: "Ofrece elegir profundidad de respuesta (25/50/75/100%) con estimación de tokens." },
   { name: "strategic-compact", cat: "Agentes", desc: "Compactación manual de contexto en intervalos lógicos." },
   { name: "enterprise-agent-ops", cat: "Agentes", desc: "Controles operativos para agentes long-lived: ciclo de vida, observabilidad, least-privilege, rollback." },
-  { name: "loop-operator", cat: "Agentes", desc: "Opera loops autónomos, monitorea progreso e interviene si se estancan." },
   { name: "automation-audit-ops", cat: "Agentes", desc: "Inventario y auditoría de automatizaciones con evidencia: jobs, hooks, conectores, MCP." },
   { name: "ecc-tools-cost-audit", cat: "Agentes", desc: "Auditoría de gasto/burn en ECC Tools: PR runaway, quota bypass, premium-model leakage." },
 
