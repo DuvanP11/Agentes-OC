@@ -4,6 +4,16 @@
    ============================================================ */
 
 const SKILLS = [
+  // ============ LEGAL ============
+  { name: "legal-advisor", cat: "Legal", desc: "Asistente jurídico IA (Legal Advisor AI). Análisis y comparación de contratos, detección de riesgos, investigación normativa y jurisprudencial colombiana, orientación jurídica básica en lenguaje claro y borradores documentales. No es un abogado ni sustituye asesoría profesional." },
+  { name: "legal-colombia-research", cat: "Legal", desc: "Investigación normativa y jurisprudencial colombiana con fuentes oficiales; verificación de citas." },
+  { name: "legal-contract-review", cat: "Legal", desc: "Revisión y análisis completo de contratos o cláusulas con formato de 13 secciones." },
+  { name: "legal-document-drafting", cat: "Legal", desc: "Redacción de cartas, solicitudes, observaciones, propuestas de modificación o borradores documentales." },
+  { name: "legal-document-reader", cat: "Legal", desc: "Lectura y extracción de documentos legales (PDF, DOCX, TXT, MD, imágenes)." },
+  { name: "legal-international-jurisdictions", cat: "Legal", desc: "Análisis de documentos con ley extranjera o jurisdicción internacional." },
+  { name: "legal-risk-analyzer", cat: "Legal", desc: "Evaluación y clasificación de riesgos contractuales con registro de riesgos." },
+  { name: "legal-source-verification", cat: "Legal", desc: "Verificación concreta de citas normativas o jurisprudenciales." },
+  { name: "legal-terms-comparator", cat: "Legal", desc: "Comparación de dos o más contratos, políticas o versiones de T&C con tabla de 9 columnas." },
   // ============ SEGURIDAD ============
   { name: "security-agent", cat: "Seguridad", desc: "Monitor de seguridad de skills/MCP + runtime antimalware (bloquea tool calls maliciosas antes de ejecutarse)." },
   { name: "security-review", cat: "Seguridad", desc: "Checklist y patrones de seguridad al añadir auth, input de usuario, secretos, endpoints o pagos." },

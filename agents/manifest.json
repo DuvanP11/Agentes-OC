@@ -1,5 +1,5 @@
 {
-  "total": 56,
+  "total": 57,
   "generated": "2026-10-15",
   "agents": [
     {
@@ -337,6 +337,20 @@
       "mode": "subagent",
       "description": "Disenador UX/UI: direccion visual, interfaces modernas, responsive, accesibilidad y estados de interfaz.",
       "file": "ui-ux-designer.json"
+    },
+    {
+      "name": "legal-advisor",
+      "mode": "subagent",
+      "description": "Asistente jurídico IA (Legal Advisor AI). Análisis y comparación de contratos, detección de riesgos, investigación normativa y jurisprudencial colombiana, orientación jurídica básica en lenguaje claro y borradores documentales. No es un abogado ni sustituye asesoría profesional.",
+      "tools": [
+        "edit",
+        "bash",
+        "read",
+        "webfetch",
+        "websearch",
+        "external_directory"
+      ],
+      "file": "agents/legal-advisor.json"
     }
   ]
 }
