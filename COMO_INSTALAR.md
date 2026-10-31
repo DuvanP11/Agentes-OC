@@ -1,6 +1,6 @@
 # 🚀 Cómo instalar OpenCode + el paquete Agentes-OC
 
-Guía paso a paso para **macOS** y **Windows**. Al final hay un **prompt listo para pegar** que hace que el propio OpenCode instale todo el paquete automáticamente.
+Guía paso a paso para **macOS** y **Windows**. Al final hay **prompts listos para pegar** en **Claude Code** o en **OpenCode** que instalan todo el paquete automáticamente, incluida la **oficina pixel** para ver a tu equipo trabajando.
 
 ---
 
@@ -13,6 +13,7 @@ Guía paso a paso para **macOS** y **Windows**. Al final hay un **prompt listo p
 4. Ejecutar el instalador de agentes (install.sh / install.ps1)
 5. Instalar skills, plugins y MCP recomendados
 6. Verificar con opencode agent list
+7. (Nuevo) Instalar la oficina pixel y ver a tu equipo
 ```
 
 ---
@@ -99,6 +100,21 @@ opencode agent list | grep -E '^\s*[a-z]' | head -20
 # Deberías ver: director, fullstack-product-engineer, security-engineer, etc.
 ```
 
+### Paso 7 · Oficina pixel: ve a tu equipo (nuevo)
+
+Además de tener los agentes, puedes **verlos** en una oficina pixel art con su
+nombre, su escritorio y lo que están haciendo en vivo. Necesita **Node 20+**
+(ya lo instalaste en el paso 1).
+
+```bash
+cd ~/dev/Agentes-OC
+bash oficina/instalar.sh          # descarga Agent-Office, compila y agrega el plugin
+~/.agentes-oc/oficina/oficina     # arranca y abre http://127.0.0.1:4099/?demo=0
+```
+
+**Reinicia OpenCode una vez** para que cargue el plugin. Más detalles en
+[`oficina/README.md`](oficina/README.md).
+
 ---
 
 ## 🪟 Windows — paso a paso
@@ -164,13 +180,24 @@ opencode agent list
 # Deberías ver: director, fullstack-product-engineer, security-engineer, etc.
 ```
 
+### Paso 7 · Oficina pixel: ve a tu equipo (nuevo)
+
+```powershell
+cd $HOME\dev\Agentes-OC
+powershell -ExecutionPolicy Bypass -File oficina\instalar.ps1
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.agentes-oc\oficina\oficina.ps1"
+```
+
+**Reinicia OpenCode una vez** para que cargue el plugin. Para cerrarla, añade
+`stop` al final del último comando; para ver quién está conectado, `status`.
+
 ---
 
 ## 🤖 Instalación automática con un prompt
 
-Copia y pega el siguiente prompt en OpenCode (en la máquina nueva). OpenCode
-detectará el sistema operativo, instalará lo que falte, clonará el repo y
-configurará todo el paquete:
+Copia y pega el siguiente prompt en **Claude Code** o en **OpenCode** (en la
+máquina nueva). Detectará el sistema operativo, instalará lo que falte,
+clonará el repo y configurará todo el paquete, incluida la oficina:
 
 ```text
 Actúa como instalador del paquete Agentes-OC. Ejecuta este plan completo y
@@ -195,17 +222,55 @@ verifica cada paso con evidencia real (salida de comandos):
    Verifica que el backup se creó y que opencode.json contiene los agentes.
 6. INSTALA el plugin de memoria: opencode plugin @cioffi_ai/opencode-memory
 7. INSTALA el MCP docling si es posible (pip install docling-mcp-server).
-8. VERIFICA el resultado final:
+8. INSTALA la oficina pixel para ver al equipo:
+   - Lee primero oficina/instalar.sh (Windows: oficina\instalar.ps1) y resume
+     qué hará; luego ejecútalo. Necesita Node 20 o superior.
+   - Arráncala: ~/.agentes-oc/oficina/oficina start
+     (Windows: oficina.ps1 start en %USERPROFILE%\.agentes-oc\oficina).
+   - Verifica que http://127.0.0.1:4099/health responde y que existe
+     ~/.config/opencode/plugins/pixel-office.ts.
+9. VERIFICA el resultado final:
    - opencode agent list → deben aparecer director, fullstack-product-engineer,
      security-engineer, security-reviewer y los demás.
    - Cuenta cuántos agentes quedaron instalados.
-9. ENTREGA un resumen final con: SO detectado, prerrequisitos instalados,
-   versión de OpenCode, número de agentes instalados y cualquier paso que
-   requiriera acción manual del usuario.
+10. ENTREGA un resumen final con: SO detectado, prerrequisitos instalados,
+   versión de OpenCode, número de agentes instalados, estado de la oficina y
+   cualquier paso que requiriera acción manual del usuario. Recuérdale que
+   reinicie OpenCode y abra http://127.0.0.1:4099/?demo=0 para ver a su equipo.
 
 Regla de seguridad: no ejecutes nada destructivo, no borres configuraciones
 existentes sin backup, y si un paso requiere sudo/administrador pídelo al
 usuario en lugar de forzarlo.
+```
+
+### Solo la oficina (si ya tienes los agentes)
+
+```text
+Actúa como instalador de la Oficina pixel de Agentes-OC
+(https://github.com/DuvanP11/Agentes-OC). Verifica cada paso con la salida
+real de los comandos:
+
+1. DETECTA el sistema operativo.
+2. VERIFICA que existan git y Node 20 o superior (node -v). Si falta alguno,
+   dime qué comando lo instala (macOS: brew install git node · Windows:
+   winget install Git.Git OpenJS.NodeJS.LTS) y pide mi permiso antes.
+3. CLONA el repo en ~/dev/Agentes-OC (si ya existe, haz git pull).
+4. LEE oficina/instalar.sh (Windows: oficina\instalar.ps1) antes de ejecutarlo
+   y resúmeme en 3 líneas qué va a hacer.
+5. EJECÚTALO: macOS/Linux bash oficina/instalar.sh · Windows
+   powershell -ExecutionPolicy Bypass -File oficina\instalar.ps1
+6. ARRANCA la oficina: ~/.agentes-oc/oficina/oficina start (Windows:
+   powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.agentes-oc\oficina\oficina.ps1" start).
+7. VERIFICA: http://127.0.0.1:4099/health responde, existe
+   ~/.config/opencode/plugins/pixel-office.ts y
+   http://127.0.0.1:4099/assets/nombres.json trae los nombres del equipo.
+8. INDÍCAME que reinicie OpenCode una vez y abra http://127.0.0.1:4099/?demo=0
+   (en VS Code: Simple Browser: Show). Cuando lo haya hecho, ejecuta
+   ~/.agentes-oc/oficina/oficina status y confirma que aparece mi sesión.
+
+Reglas: no borres ni sobrescribas configuraciones (el instalador respalda lo
+que reemplaza), no modifiques opencode.json, no muestres tokens ni claves, y
+si algo pide sudo/administrador, pregúntame primero.
 ```
 
 ---
@@ -219,6 +284,7 @@ usuario en lugar de forzarlo.
 | Backup creado | existe `opencode.json.backup-*` en tu carpeta de config de OpenCode |
 | Plugin memoria | `opencode plugin list` muestra `@cioffi_ai/opencode-memory` |
 | MCP docling | `opencode mcp list` muestra `docling` |
+| Oficina pixel | `~/.agentes-oc/oficina/oficina status` → "Corriendo" y tu sesión en la lista |
 | Web desplegada | `https://agentes-oc.vercel.app` (o tu dominio Vercel) |
 
 ---
