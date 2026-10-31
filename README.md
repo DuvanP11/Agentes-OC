@@ -1,6 +1,19 @@
 # Agentes-OC
 
-**Paquete de Agentes y SubAgentes IA para OpenCode** — sitio web visual con el inventario completo de tu ecosistema (agentes, subagentes, skills, seguridad, plugins, MCP, guion de llamada) **+ paquete instalable** de los 56 agentes para cualquier Mac o Windows.
+**Paquete de Agentes y SubAgentes IA para OpenCode** — sitio web visual con el inventario completo de tu ecosistema (agentes, subagentes, skills, seguridad, plugins, MCP, guion de llamada) **+ paquete instalable** de los 56 agentes para cualquier Mac o Windows **+ oficina pixel** para ver a tu equipo trabajando.
+
+## 🏢 Nuevo: ahora también puedes ver a tu equipo
+
+Además de tener tus agentes, puedes verlos en una oficina pixel art: cada uno con su nombre, su ropa y su escritorio. Cuando OpenCode trabaja ves en vivo quién lo hace y en qué (editando, investigando, ejecutando, esperando permiso, error); cuando descansan, leen, juegan ping-pong, toman café o charlan. Todo local, en `127.0.0.1`.
+
+![Jarvis y Marta trabajando en la oficina](assets/oficina-detalle.png)
+
+```bash
+bash oficina/instalar.sh            # macOS / Linux  (Windows: oficina\instalar.ps1)
+~/.agentes-oc/oficina/oficina       # arranca y abre la oficina
+```
+
+Detalles, personalización y desinstalación: **[`oficina/README.md`](oficina/README.md)**.
 
 ![Stack](https://img.shields.io/badge/stack-HTML%20%2B%20CSS%20%2B%20JS-6c8cff) ![Vercel](https://img.shields.io/badge/deploy-Vercel-000000) ![OpenCode](https://img.shields.io/badge/OpenCode-1.19.0-38d9a9) ![Agentes](https://img.shields.io/badge/agentes-56-9d6cff)
 
@@ -22,7 +35,12 @@ powershell -ExecutionPolicy Bypass -File install.ps1   # Windows
 
 # 3. Verifica
 opencode agent list
+
+# 4. (Nuevo) Oficina pixel para ver al equipo — necesita Node 20+
+bash oficina/instalar.sh && ~/.agentes-oc/oficina/oficina
 ```
+
+> ¿Prefieres que lo haga una IA? En [`COMO_INSTALAR.md`](COMO_INSTALAR.md#-instalación-automática-con-un-prompt) hay prompts para pegar en **Claude Code** u **OpenCode**: uno instala todo y otro solo la oficina.
 
 > El instalador **no borra** tus agentes existentes: hace backup y fusiona los del paquete.
 
@@ -61,7 +79,8 @@ vercel --prod     # deploy a producción
 | **Guion de llamada** | Tabla tarea → agente → prompt sugerido para invocar cada especialista |
 | **Skills** | 237 skills, agrupadas por dominio, con búsqueda y filtros |
 | **Seguridad** | Agentes de seguridad, runtime antimalware (sentinel), políticas y capas de defensa |
-| **Instalación** | Paso a paso de 3 pasos para instalar los 56 agentes en Mac/Windows + prompt de autoinstalación copiable |
+| **Oficina** | Nuevo: capturas y explicación de la oficina pixel donde ves a tu equipo trabajar |
+| **Instalación** | Paso a paso para instalar los 56 agentes y la oficina en Mac/Windows + prompts de autoinstalación (Claude Code u OpenCode) |
 | **Recursos** | Paquetes y comandos para que OpenCode funcione bien en **macOS** y **Windows** |
 
 ---
@@ -142,6 +161,8 @@ Agentes-OC/
 ├── install.sh          # Instalador de agentes (macOS/Linux)
 ├── install.ps1         # Instalador de agentes (Windows)
 ├── agents/             # Paquete de 56 agentes (JSON + MD + manifest)
+├── oficina/            # Oficina pixel: plugin, web, instaladores (ver oficina/README.md)
+├── assets/             # Capturas de la oficina
 ├── scripts/
 │   └── export-agents.sh# Regenera el paquete desde tu OpenCode
 ├── css/styles.css      # Tema oscuro profesional

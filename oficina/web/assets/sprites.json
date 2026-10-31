@@ -1,0 +1,198 @@
+{
+ "frameW": 32,
+ "frameH": 40,
+ "fps": 8,
+ "default": "worker",
+ "sprites": {
+  "worker": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f0c8a0",
+    "hair": "#4a3728",
+    "shirt": "#3a7bd5",
+    "pants": "#2f2f3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "sam": {
+   "sheet": null,
+   "palette": {
+    "skin": "#e8b88a",
+    "hair": "#2b2b2b",
+    "shirt": "#e0703c",
+    "pants": "#3a3330",
+    "shoes": "#22262e"
+   }
+  },
+  "dino": {
+   "sheet": null,
+   "palette": {
+    "skin": "#8fd46a",
+    "hair": "#4e9b3a",
+    "shirt": "#c4e8a0",
+    "pants": "#5a8f44",
+    "shoes": "#2f5a28"
+   }
+  },
+  "p0": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f0c8a0",
+    "hair": "#4a3728",
+    "shirt": "#3a7bd5",
+    "pants": "#2f2f3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p1": {
+   "sheet": null,
+   "palette": {
+    "skin": "#a86b45",
+    "hair": "#e0c068",
+    "shirt": "#e0703c",
+    "pants": "#3a3330",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p2": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f5d5b8",
+    "hair": "#1c1c22",
+    "shirt": "#35a06a",
+    "pants": "#2a3a5a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p3": {
+   "sheet": null,
+   "palette": {
+    "skin": "#8d5a3b",
+    "hair": "#2b2b2b",
+    "shirt": "#b04a8c",
+    "pants": "#4a3a2a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p4": {
+   "sheet": null,
+   "palette": {
+    "skin": "#c68c5a",
+    "hair": "#6b2e1e",
+    "shirt": "#d9b03a",
+    "pants": "#3a4a3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p5": {
+   "sheet": null,
+   "palette": {
+    "skin": "#e8b88a",
+    "hair": "#c0392b",
+    "shirt": "#5a4fa8",
+    "pants": "#2f2f3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p6": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f0c8a0",
+    "hair": "#b8732e",
+    "shirt": "#2a9d9d",
+    "pants": "#3a3330",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p7": {
+   "sheet": null,
+   "palette": {
+    "skin": "#a86b45",
+    "hair": "#9a9aa2",
+    "shirt": "#c94040",
+    "pants": "#2a3a5a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p8": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f5d5b8",
+    "hair": "#4a3728",
+    "shirt": "#7a8a3a",
+    "pants": "#4a3a2a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p9": {
+   "sheet": null,
+   "palette": {
+    "skin": "#8d5a3b",
+    "hair": "#e0c068",
+    "shirt": "#e88aa8",
+    "pants": "#3a4a3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p10": {
+   "sheet": null,
+   "palette": {
+    "skin": "#c68c5a",
+    "hair": "#1c1c22",
+    "shirt": "#4a6a8a",
+    "pants": "#2f2f3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p11": {
+   "sheet": null,
+   "palette": {
+    "skin": "#e8b88a",
+    "hair": "#2b2b2b",
+    "shirt": "#8a5a3a",
+    "pants": "#3a3330",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p12": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f0c8a0",
+    "hair": "#6b2e1e",
+    "shirt": "#3a7bd5",
+    "pants": "#2a3a5a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p13": {
+   "sheet": null,
+   "palette": {
+    "skin": "#a86b45",
+    "hair": "#c0392b",
+    "shirt": "#e0703c",
+    "pants": "#4a3a2a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p14": {
+   "sheet": null,
+   "palette": {
+    "skin": "#f5d5b8",
+    "hair": "#b8732e",
+    "shirt": "#35a06a",
+    "pants": "#3a4a3a",
+    "shoes": "#1c1c22"
+   }
+  },
+  "p15": {
+   "sheet": null,
+   "palette": {
+    "skin": "#8d5a3b",
+    "hair": "#9a9aa2",
+    "shirt": "#b04a8c",
+    "pants": "#2f2f3a",
+    "shoes": "#1c1c22"
+   }
+  }
+ }
+}

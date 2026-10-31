@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Office</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #0e1016;
+        color: #e7e9ee;
+        font-family: ui-monospace, Menlo, monospace;
+      }
+      #wrap {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 16px 12px 40px;
+      }
+      header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 10px;
+        letter-spacing: 1px;
+      }
+      h1 span {
+        color: #6a9fe8;
+      }
+      #scene {
+        width: 100%;
+        height: auto;
+        display: block;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        background: #1a1d26;
+        border: 2px solid #262b36;
+        border-radius: 4px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 12px 0;
+      }
+      .toolbar button {
+        font: inherit;
+        font-size: 12px;
+        padding: 5px 10px;
+        background: #1d2330;
+        color: #cfd6e4;
+        border: 1px solid #333c4d;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .toolbar button:hover {
+        background: #283045;
+      }
+      .hint {
+        font-size: 11px;
+        color: #7c8496;
+      }
+      .hint kbd {
+        background: #222836;
+        padding: 1px 5px;
+        border-radius: 3px;
+      }
+      .hint a {
+        color: #6a9fe8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <header>
+        <h1>Agent <span>Office</span></h1>
+        <div class="hint"><kbd>D</kbd> zone overlay · <a href="/status">/status</a></div>
+      </header>
+      <canvas id="scene" width="960" height="540"></canvas>
+      <div class="toolbar" id="toolbar"></div>
+      <p class="hint">
+        SSE <code>/events</code> with 2s polling fallback · <code>?debug=1</code> shows zones ·
+        <code>?demo=0</code> disables the demo character
+      </p>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

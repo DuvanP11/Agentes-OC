@@ -149,7 +149,6 @@ const SUBAGENTS = [
   { name: "media-producer", category: "Media", description: "Guiones, storyboards, videos demo y tutoriales, subtítulos y voz; monta con Remotion/FFmpeg/Playwright.", when: "Videos, demos, tutoriales audiovisuales." },
   { name: "doctor", category: "Sistema", description: "Diagnostica SO, versión y configuración de OpenCode, dependencias, plugins, MCP, modelos/proveedores, logs y conflictos. Solo lectura.", when: "Algo falla en tu entorno OpenCode/sistema." },
   { name: "quality-auditor", category: "Sistema", description: "Auditor independiente: verifica código, configuraciones, pruebas, regresiones, riesgos de seguridad, documentos y cálculos; emite veredicto de aceptación con evidencia. Solo lectura.", when: "Validación final antes de aceptar un entregable." }
-  { name: "", category: "Legal", description: "Asistente jurídico IA (Legal Advisor AI). Análisis y comparación de contratos, detección de riesgos, investigación normativa y jurisprudencial colombiana, orientación jurídica básica en lenguaje claro y borradores documentales. No es un abogado ni sustituye asesoría profesional.", when: "Revisar contratos, comparar T&C, evaluar riesgos, investigar normas colombianas con fuentes oficiales, preparar borradores." },
 ];
 
 /* ------------------------------------------------------------
@@ -200,8 +199,8 @@ const SECURITY = {
   agents: [
     { name: "security-engineer", type: "Subagente AppSec integral", detail: "Audita código, dependencias, secretos, authn/authz, skills/MCP, CI/CD. Informes con evidencia, severidad y correcciones verificadas. Permisos mínimos (subagent, temp 0.1)." },
     { name: "security-reviewer", type: "Subagente post-diff", detail: "Revisión focalizada de cambios recientes que manejan input de usuario, auth, endpoints o datos sensibles. Delega auditorías grandes a security-engineer." },
-    { name: "security-agent (skill)", type: "Skill de monitoreo", detail: "Escanea skills/MCP instalados contra bases de vulnerabilidades (GitHub Advisory, vulnerablemcp.info, CVE, Snyk, VirusTotal) y alertas comunitarias; análisis de coherencia y diff de actualizaciones." }
-    { name: "", type: "Subagente jurídico", detail: "Análisis y comparación de contratos, detección de riesgos, investigación normativa y jurisprudencial colombiana, orientación jurídica básica en lenguaje claro y borradores documentales. No es un abogado ni sustituye asesoría profesional." },
+    { name: "security-agent (skill)", type: "Skill de monitoreo", detail: "Escanea skills/MCP instalados contra bases de vulnerabilidades (GitHub Advisory, vulnerablemcp.info, CVE, Snyk, VirusTotal) y alertas comunitarias; análisis de coherencia y diff de actualizaciones." },
+    { name: "legal-advisor", type: "Subagente jurídico", detail: "Análisis y comparación de contratos, detección de riesgos, investigación normativa y jurisprudencial colombiana, orientación jurídica básica en lenguaje claro y borradores documentales. No es un abogado ni sustituye asesoría profesional." },
   ],
   runtime: [
     { name: "security-agent.ts", type: "Plugin runtime", detail: "Auto-carga en OpenCode. Capa tool.execute.before que bloquea llamadas maliciosas (exfiltración de credenciales, dominios conocidos-bad, reverse shells, curl|bash) con cero costo de LLM." },

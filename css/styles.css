@@ -276,7 +276,7 @@ a:hover { text-decoration: underline; }
 .res-note { color: var(--text-faint); font-size: 0.8rem; }
 
 /* ===== INSTALACIÓN ===== */
-.install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 26px; }
+.install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 26px; }
 .step-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 22px; position: relative; transition: transform 0.18s, border-color 0.18s;
@@ -347,3 +347,16 @@ a:hover { text-decoration: underline; }
   * { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
 }
+/* ===== OFICINA PIXEL ===== */
+.office-shot { margin: 0 auto 26px; max-width: 980px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+.office-shot img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); image-rendering: pixelated; }
+.office-shot figcaption { color: var(--text-dim); font-size: 0.85rem; margin-top: 10px; text-align: center; }
+.office-shot-tall { max-width: 620px; }
+.office-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 26px; }
+.office-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.office-card h3 { font-family: var(--font-display); font-size: 1.02rem; font-weight: 600; margin-bottom: 12px; }
+.office-legend { list-style: none; display: grid; gap: 8px; color: var(--text-dim); font-size: 0.88rem; line-height: 1.5; }
+.office-legend b { color: var(--text); font-weight: 600; }
+.office-note { margin-top: 12px; color: var(--text-faint); font-size: 0.8rem; }
+.step-new { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--grad); color: #fff; font-size: 0.68rem; font-weight: 700; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.04em; }
+.hero-sub a { color: var(--accent-3); }

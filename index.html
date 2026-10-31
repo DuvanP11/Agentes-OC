@@ -24,6 +24,7 @@
       <div class="nav-links" id="navLinks">
         <a href="#esquema">Esquema</a>
         <a href="#agentes">Agentes</a>
+        <a href="#oficina">Oficina</a>
         <a href="#guion">Guion de llamada</a>
         <a href="#skills">Skills</a>
         <a href="#seguridad">Seguridad</a>
@@ -39,9 +40,10 @@
     <div class="hero-content">
       <p class="hero-eyebrow">OpenCode v<span id="ocVersion">1.19.0</span> · Inventario verificado</p>
       <h1>Tu ecosistema de <span class="grad">agentes</span>, <span class="grad">skills</span> y <span class="grad">seguridad</span></h1>
-      <p class="hero-sub">Mapa visual, guion de llamada por tarea y recursos listos para desplegar. Todo lo que vive en tu OpenCode, organizado y comprensible.</p>
+      <p class="hero-sub">Mapa visual, guion de llamada por tarea y recursos listos para desplegar. Todo lo que vive en tu OpenCode, organizado y comprensible. <strong>Nuevo:</strong> además de tener tu equipo, ahora puedes <a href="#oficina">verlo trabajar en una oficina pixel</a>.</p>
       <div class="hero-actions">
         <a href="#esquema" class="btn btn-primary">Ver el esquema</a>
+        <a href="#oficina" class="btn btn-ghost">🏢 Ver la oficina</a>
         <a href="#guion" class="btn btn-ghost">¿A quién llamo?</a>
       </div>
       <div class="stats" id="statsGrid">
@@ -161,6 +163,61 @@ flowchart TB
       <div class="agent-grid" id="agentGrid"></div>
     </section>
 
+    <!-- ===== OFICINA ===== -->
+    <section class="section" id="oficina">
+      <div class="section-head">
+        <p class="section-tag">Nuevo · Oficina pixel</p>
+        <h2>Ahora también puedes ver a tu equipo</h2>
+        <p class="section-sub">Además de tener tus 56 agentes en OpenCode, puedes verlos en una oficina pixel art: cada uno con su nombre, su ropa y su escritorio. Cuando OpenCode trabaja, ves en vivo quién lo hace y en qué; cuando descansan, leen, juegan ping-pong, toman café o charlan. Todo corre en tu computador (<code>127.0.0.1</code>).</p>
+      </div>
+
+      <figure class="office-shot">
+        <img src="assets/oficina-detalle.png" alt="Jarvis (director) editando index.html y Marta (data-analyst) leyendo ventas.csv en sus escritorios, con etiquetas verdes" loading="lazy" />
+        <figcaption>Jarvis (director) y su subagente Marta (data-analyst) trabajando en sus escritorios. La etiqueta verde marca las sesiones reales de OpenCode; el globo dice qué están haciendo.</figcaption>
+      </figure>
+
+      <div class="office-grid">
+        <div class="office-card">
+          <h3>🟢 Lo que pasa de verdad</h3>
+          <ul class="office-legend">
+            <li><b>En su escritorio</b> · trabajando: ✍️ editando, 🔍 investigando, ⚙️ ejecutando, 💭 pensando</li>
+            <li><b>En la puerta</b> · esperando un permiso, una pregunta tuya o la cuota del proveedor</li>
+            <li><b>Junto al servidor</b> · la sesión tuvo un error</li>
+            <li><b>↳ Nombre</b> · subagente llamado por el agente principal</li>
+          </ul>
+          <p class="office-note">Nunca muestra comandos ni secretos: solo el nombre del archivo o la descripción corta de la tarea.</p>
+        </div>
+        <div class="office-card">
+          <h3>🪑 Un equipo organizado</h3>
+          <ul class="office-legend">
+            <li><b>64 escritorios</b>, 56 con placa y el nombre de su agente</li>
+            <li><b>Nombres humanos</b>: director = Jarvis, data-analyst = Marta, frontend = Juan…</li>
+            <li><b>Todo el equipo vive ahí</b>, aunque aún no lo hayas llamado</li>
+            <li>Cuando llamas a un agente, su compañero <b>se convierte</b> en la sesión real y va a su escritorio</li>
+          </ul>
+        </div>
+        <div class="office-card">
+          <h3>🎮 Salas para descansar</h3>
+          <ul class="office-legend">
+            <li><b>Sala de juegos</b> · arcades, ping-pong y puffs</li>
+            <li><b>Cocina</b> · café, nevera, snacks y mesa</li>
+            <li><b>Descanso</b> · sofá y TV</li>
+            <li>Globo <b>gris</b> = ambiente de oficina, nunca trabajo real</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="office-shot office-shot-tall">
+        <img src="assets/oficina-equipo.png" alt="Vista completa de la oficina: 64 escritorios con placas, recepción y las salas de juegos, cocina y descanso" loading="lazy" />
+        <figcaption>La oficina completa: recepción y servidor arriba, 64 escritorios con placa y las tres salas abajo.</figcaption>
+      </figure>
+
+      <div class="install-actions">
+        <a href="#instalacion" class="btn btn-primary">Instalar la oficina</a>
+        <a href="https://github.com/DuvanP11/Agentes-OC/blob/main/oficina/README.md" class="btn btn-ghost" target="_blank" rel="noopener">📖 Cómo funciona</a>
+      </div>
+    </section>
+
     <!-- ===== GUION ===== -->
     <section class="section" id="guion">
       <div class="section-head">
@@ -254,7 +311,7 @@ flowchart TB
       <div class="section-head">
         <p class="section-tag">Paquete instalable</p>
         <h2>Cómo instalar todo</h2>
-        <p class="section-sub">Este repo incluye las definiciones reales de los <strong>56 agentes</strong> (7 primarios + 49 subagentes) y un instalador para macOS, Linux y Windows. No borra tus agentes existentes: hace backup y fusiona.</p>
+        <p class="section-sub">Este repo incluye las definiciones reales de los <strong>56 agentes</strong> (7 primarios + 49 subagentes), un instalador para macOS, Linux y Windows y, ahora, la <strong>oficina pixel</strong> para ver al equipo trabajando. No borra tus agentes existentes: hace backup y fusiona.</p>
       </div>
 
       <div class="install-grid">
@@ -276,6 +333,12 @@ flowchart TB
           <p class="step-text">Confirma que todos los agentes quedaron cargados en tu OpenCode.</p>
           <code class="step-code">opencode agent list</code>
         </div>
+        <div class="step-card">
+          <span class="step-num">4</span>
+          <h3 class="step-title">Instala la oficina <span class="step-new">nuevo</span></h3>
+          <p class="step-text">Necesita Node 20+. Descarga Agent-Office, lo compila y agrega el plugin. Luego reinicia OpenCode una vez.</p>
+          <code class="step-code"># macOS / Linux<br/>bash oficina/instalar.sh<br/>~/.agentes-oc/oficina/oficina<br/><br/># Windows<br/>powershell -ExecutionPolicy Bypass -File oficina\instalar.ps1</code>
+        </div>
       </div>
 
       <div class="install-actions">
@@ -285,10 +348,10 @@ flowchart TB
 
       <div class="install-prompt-card">
         <div class="install-prompt-head">
-          <h3>🤖 O autoinstalación con un prompt</h3>
+          <h3>🤖 O autoinstalación con un prompt (Claude Code u OpenCode)</h3>
           <button class="copy-btn" data-copy="installPrompt">📋 Copiar prompt</button>
         </div>
-        <p class="section-sub" style="margin-bottom:14px;">Pega este prompt en OpenCode (en la máquina nueva): detecta el SO, instala lo que falte, clona el repo, ejecuta el instalador, agrega el plugin de memoria y el MCP docling, y verifica el resultado.</p>
+        <p class="section-sub" style="margin-bottom:14px;">Pega este prompt en <strong>Claude Code</strong> o en <strong>OpenCode</strong> (en la máquina nueva): detecta el SO, instala lo que falte, clona el repo, ejecuta el instalador, agrega el plugin de memoria, el MCP docling y la oficina pixel, y verifica el resultado.</p>
         <pre class="install-prompt" id="installPrompt">Actúa como instalador del paquete Agentes-OC. Ejecuta este plan completo y verifica cada paso con evidencia real (salida de comandos):
 
 1. DETECTA el sistema operativo (macOS, Windows o Linux) con uname o ver.
@@ -302,13 +365,34 @@ flowchart TB
 5. EJECUTA el instalador de agentes: macOS/Linux bash install.sh, Windows powershell -ExecutionPolicy Bypass -File install.ps1. Verifica que el backup se creó y que opencode.json contiene los agentes.
 6. INSTALA el plugin de memoria: opencode plugin @cioffi_ai/opencode-memory.
 7. INSTALA el MCP docling si es posible (pip install docling-mcp-server).
-8. VERIFICA el resultado final: opencode agent list debe mostrar director, fullstack-product-engineer, security-engineer, security-reviewer y los demás. Cuenta cuántos agentes quedaron instalados.
-9. ENTREGA un resumen final con: SO detectado, prerrequisitos instalados, versión de OpenCode, número de agentes instalados y cualquier paso que requiriera acción manual.
+8. INSTALA la oficina pixel para ver al equipo: lee primero oficina/instalar.sh (Windows: oficina\instalar.ps1) y resume qué hará; luego ejecútalo. Necesita Node 20 o superior. Arráncala con ~/.agentes-oc/oficina/oficina start (Windows: oficina.ps1 start en %USERPROFILE%\.agentes-oc\oficina) y verifica que http://127.0.0.1:4099/health responde y que existe ~/.config/opencode/plugins/pixel-office.ts.
+9. VERIFICA el resultado final: opencode agent list debe mostrar director, fullstack-product-engineer, security-engineer, security-reviewer y los demás. Cuenta cuántos agentes quedaron instalados.
+10. ENTREGA un resumen final con: SO detectado, prerrequisitos instalados, versión de OpenCode, número de agentes instalados, estado de la oficina y cualquier paso que requiriera acción manual. Recuerda al usuario reiniciar OpenCode y abrir http://127.0.0.1:4099/?demo=0 para ver a su equipo.
 
 Regla de seguridad: no ejecutes nada destructivo, no borres configuraciones existentes sin backup, y si un paso requiere sudo/administrador pídelo al usuario.</pre>
       </div>
 
-      <p class="install-note">Archivos del paquete: <code>agents/</code> (56 definiciones JSON + MD) · <code>install.sh</code> · <code>install.ps1</code> · <code>scripts/export-agents.sh</code> (regenera el paquete desde tu OpenCode).</p>
+      <div class="install-prompt-card" style="margin-top:22px;">
+        <div class="install-prompt-head">
+          <h3>🏢 Solo la oficina, con ayuda de Claude Code u OpenCode</h3>
+          <button class="copy-btn" data-copy="officePrompt">📋 Copiar prompt</button>
+        </div>
+        <p class="section-sub" style="margin-bottom:14px;">Si ya tienes los agentes instalados y solo quieres ver la oficina, pega este prompt.</p>
+        <pre class="install-prompt" id="officePrompt">Actúa como instalador de la Oficina pixel de Agentes-OC (https://github.com/DuvanP11/Agentes-OC). Verifica cada paso con la salida real de los comandos:
+
+1. DETECTA el sistema operativo.
+2. VERIFICA que existan git y Node 20 o superior (node -v). Si falta alguno, dime qué comando lo instala (macOS: brew install git node · Windows: winget install Git.Git OpenJS.NodeJS.LTS) y pide mi permiso antes de instalarlo.
+3. CLONA el repo en ~/dev/Agentes-OC (si ya existe, haz git pull).
+4. LEE oficina/instalar.sh (Windows: oficina\instalar.ps1) antes de ejecutarlo y resúmeme en 3 líneas qué va a hacer.
+5. EJECÚTALO: macOS/Linux bash oficina/instalar.sh · Windows powershell -ExecutionPolicy Bypass -File oficina\instalar.ps1
+6. ARRANCA la oficina: ~/.agentes-oc/oficina/oficina start (Windows: powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.agentes-oc\oficina\oficina.ps1" start).
+7. VERIFICA: http://127.0.0.1:4099/health responde, existe ~/.config/opencode/plugins/pixel-office.ts y http://127.0.0.1:4099/assets/nombres.json trae los nombres del equipo.
+8. INDÍCAME que reinicie OpenCode una vez y abra http://127.0.0.1:4099/?demo=0 (en VS Code: Simple Browser: Show). Cuando lo haya hecho, ejecuta ~/.agentes-oc/oficina/oficina status y confirma que aparece mi sesión.
+
+Reglas: no borres ni sobrescribas configuraciones (el instalador respalda lo que reemplaza), no modifiques opencode.json, no muestres tokens ni claves, y si algo pide sudo/administrador, pregúntame primero.</pre>
+      </div>
+
+      <p class="install-note">Archivos del paquete: <code>agents/</code> (56 definiciones JSON + MD) · <code>install.sh</code> · <code>install.ps1</code> · <code>scripts/export-agents.sh</code> (regenera el paquete desde tu OpenCode) · <code>oficina/</code> (plugin, web e instaladores de la oficina pixel).</p>
     </section>
 
   </main>
