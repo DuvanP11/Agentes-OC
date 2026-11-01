@@ -183,7 +183,7 @@ const residents = new Map();
 }
 
 function visibleResidents() {
-  const busy = new Set([...characters.values()].map((c) => c.role).filter(Boolean));
+  const busy = new Set([...characters.values()].filter((c) => !c.blocked).map((c) => c.role).filter(Boolean));
   const out = [];
   for (const [role, r] of residents) {
     if (busy.has(role)) {
@@ -233,6 +233,11 @@ function upsertAgent(agent) {
   const quota = /^reintento (\d+): .*(usage|quota|limit|exceeded|subscribe)/i.exec(agent.detail ?? "");
   const detail = quota ? `sin cuota · reintento ${quota[1]}` : agent.detail;
   c.setState(agent.state, detail, agent.zone);
+  // pixel-office-opencode: un subagente que solo espera cuota del proveedor no
+  // aporta nada y se multiplica (las tareas internas de memoria reintentan
+  // cada pocos minutos): no se dibuja. Es lo mismo que hace el plugin nuevo;
+  // esto cubre a los OpenCode que aún corren el plugin viejo.
+  c.blocked = String(agent.name ?? "").startsWith("↳") && agent.state === "waiting" && Boolean(quota || /^sin cuota/.test(agent.detail ?? ""));
   if (agent.joinedAt) c.joinedAt = agent.joinedAt;
   if (agent.lastSeen) c.lastSeen = agent.lastSeen;
 }
@@ -399,7 +404,8 @@ function frame(t) {
   const team = visibleResidents();
   for (const c of characters.values()) c.update(dt);
   for (const c of team) c.update(dt);
-  const visible = demo && characters.size === 0 ? demo.list() : [...characters.values(), ...team];
+  const shown = [...characters.values()].filter((c) => !c.blocked);
+  const visible = demo && characters.size === 0 ? demo.list() : [...shown, ...team];
   scene.draw({ characters: visible, mode, time: t / 1000 });
   requestAnimationFrame(frame);
 }
