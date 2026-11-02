@@ -10,6 +10,9 @@ import { hashId, hasFreeSpot, pickSpot, releaseAgent, zoneById } from "./logic.j
 import { MemoCard } from "./memo.js";
 import { initMobileSheet } from "./mobile.js";
 import { AssetManager, STORAGE_KEYS, loadOverride } from "./assetmanager.js";
+import { Ficha } from "./ficha.js";
+
+const ficha = new Ficha();
 
 const params = new URLSearchParams(location.search);
 const debugFlag = params.get("debug") === "1";
@@ -233,6 +236,7 @@ function upsertAgent(agent) {
   const quota = /^reintento (\d+): .*(usage|quota|limit|exceeded|subscribe)/i.exec(agent.detail ?? "");
   const detail = quota ? `sin cuota · reintento ${quota[1]}` : agent.detail;
   c.setState(agent.state, detail, agent.zone);
+  ficha.record(c, agent.state, detail);
   // pixel-office-opencode: un subagente que solo espera cuota del proveedor no
   // aporta nada y se multiplica (las tareas internas de memoria reintentan
   // cada pocos minutos): no se dibuja. Es lo mismo que hace el plugin nuevo;
@@ -286,9 +290,7 @@ const mobileSheet = initMobileSheet({
   characters,
   onSelect: (agentId) => {
     const char = characters.get(agentId);
-    if (char) {
-      // Center camera on selected agent (future enhancement)
-    }
+    if (char) ficha.open(char);
   },
 });
 
@@ -417,9 +419,48 @@ function frame(t) {
   const shown = [...characters.values()].filter((c) => !isHidden(c));
   const visible = demo && characters.size === 0 ? demo.list() : [...shown, ...team];
   scene.draw({ characters: visible, mode, time: t / 1000 });
+  drawones = visible;
+  // flecha amarilla sobre el personaje de la ficha abierta
+  ficha.follow((s) => (s.role ? visible.find((c) => c.role === s.role) : visible.find((c) => c.id === s.id)));
+  const sel = ficha.sel && visible.includes(ficha.sel) ? ficha.sel : null;
+  if (sel) {
+    const g = canvas.getContext("2d");
+    // por encima del globo
+    const top = sel.y - sel.sprite.frameH - 30 - 3 * Math.abs(Math.sin(t / 250));
+    g.fillStyle = "#ffd23f";
+    g.strokeStyle = "#1a1d26";
+    g.lineWidth = 2;
+    g.beginPath();
+    g.moveTo(sel.x - 8, top - 11);
+    g.lineTo(sel.x + 8, top - 11);
+    g.lineTo(sel.x, top);
+    g.closePath();
+    g.stroke();
+    g.fill();
+  }
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+
+// pixel-office-opencode: clic en un personaje → su ficha (ficha.js)
+let drawones = [];
+function hit(e) {
+  const r = canvas.getBoundingClientRect();
+  const x = ((e.clientX - r.left) / r.width) * canvas.width;
+  const y = ((e.clientY - r.top) / r.height) * canvas.height;
+  // caja del sprite + etiqueta; si se tapan, gana el de adelante (más abajo)
+  const hits = drawones.filter(
+    (c) => Math.abs(x - c.x) <= c.sprite.frameW / 2 + 2 && y >= c.y - c.sprite.frameH && y <= c.y + 14,
+  );
+  return hits.sort((a, b) => b.y - a.y)[0];
+}
+canvas.addEventListener("click", (e) => {
+  const c = hit(e);
+  if (c) ficha.open(c);
+});
+canvas.addEventListener("mousemove", (e) => {
+  canvas.style.cursor = hit(e) ? "pointer" : "";
+});
 
 // Set-state toolbar (PLAN.md #13 acceptance: POST /set_state reflects on screen).
 const STATE_BUTTONS = [

@@ -52,6 +52,8 @@ const HEARTBEAT_MS = 15_000 // el backend pasa a idle a los 60 s y saca a los 12
 const IDLE_KEEP_MS = 15 * 60_000 // una sesión quieta deja de latir y sale de la oficina
 const CHILD_LEAVE_MS = 8_000 // el subagente se queda un momento tras terminar
 const DETAIL_MAX = 78
+const THOUGHT_GAP_MS = 2_000 // como mucho una frase de pensamiento cada 2 s
+const HELPER_TITLES = new Set(["memory-consolidation", "memory-surfacing"])
 
 const TOOL_STATE: Record<string, State> = {
   read: "researching",
@@ -136,6 +138,19 @@ function errorText(error: any): string {
   const name = String(error.name ?? "Error")
   const msg = String(error.data?.message ?? error.message ?? "").split("\n")[0]
   return clip(`${name}${msg ? `: ${msg}` : ""}`, 48)
+}
+
+// la última frase de lo que el modelo va pensando o escribiendo; si la que
+// se está escribiendo aún es muy corta, la anterior
+function lastSentence(text: string): string {
+  const tail = text.slice(-400).replace(/[*`#>_|]+/g, "")
+  const pieces = tail
+    .split(/(?<=[.!?:;])\s+|\n+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length >= 8)
+  let s = pieces.at(-1) ?? tail.trim()
+  if (pieces.length > 1 && s.length < 30 && !/[.!?:;]$/.test(s)) s = pieces.at(-2)!
+  return s
 }
 
 // globo corto: el mensaje completo del proveedor tapa a los vecinos
@@ -227,7 +242,8 @@ export const PixelOfficePlugin = async ({ client, directory }: PluginInput) => {
     if (seat.gone) return
     if (!seat.agentId) await join(seat)
     if (!seat.agentId) return
-    const detail = seat.task && seat.state !== "error" ? clip(`${seat.detail} · ${seat.task}`) : seat.detail
+    const own = /^(💭|💬) /.test(seat.detail) // un pensamiento ya ocupa todo el globo
+    const detail = seat.task && seat.state !== "error" && !own ? clip(`${seat.detail} · ${seat.task}`) : seat.detail
     const key = `${seat.state}|${detail}`
     if (!force && key === seat.sent) return
     seat.lastPush = Date.now()
@@ -283,6 +299,30 @@ export const PixelOfficePlugin = async ({ client, directory }: PluginInput) => {
     seat.detail = clip(detail)
     seat.lastActivity = Date.now()
     schedule(seat)
+  }
+
+  // lo que el agente va pensando (reasoning) o respondiendo (text), en una
+  // frase corta para el globo y la ficha de la oficina. Solo mensajes del
+  // asistente: nunca se repite lo que escribe el usuario.
+  const userMsgs = new Set<string>()
+  const parts = new Map<string, { sessionID: string; kind: string; text: string }>()
+  const lastThought = new Map<string, number>()
+  const lastSaid = new Map<string, string>()
+  function cap<T>(c: Set<T> | Map<T, unknown>) {
+    if (c.size > 300) c.delete(c.keys().next().value as T)
+  }
+  function thought(sessionID: string | undefined, kind: string, text: string, force = false) {
+    if (!sessionID || muted.has(sessionID) || HELPER_TITLES.has(titles.get(sessionID) ?? "")) return
+    const seat = seats.get(sessionID)
+    // no tapa una herramienta en curso ni una pregunta de permiso
+    if (seat && seat.state !== "thinking") return
+    const now = Date.now()
+    if (!force && now - (lastThought.get(sessionID) ?? 0) < THOUGHT_GAP_MS) return
+    const s = lastSentence(text)
+    if (s.length < 8) return
+    lastThought.set(sessionID, now)
+    cap(lastThought)
+    set(sessionID, "thinking", `${kind === "reasoning" ? "💭" : "💬"} ${s}`)
   }
 
   async function leave(seat: Seat) {
@@ -378,6 +418,39 @@ export const PixelOfficePlugin = async ({ client, directory }: PluginInput) => {
               if (p.info.title) titles.set(p.info.id, String(p.info.title))
             }
             break
+          case "message.updated":
+            if (p.info?.role === "user" && p.info.id) {
+              userMsgs.add(p.info.id)
+              cap(userMsgs)
+            }
+            break
+          case "message.part.updated": {
+            const part = p.part
+            if (!part?.id || (part.type !== "reasoning" && part.type !== "text")) break
+            if (part.synthetic || userMsgs.has(part.messageID)) break
+            const text = String(part.text ?? "")
+            parts.set(part.id, { sessionID: part.sessionID, kind: part.type, text })
+            cap(parts)
+            const ended = Boolean(part.time?.end)
+            thought(part.sessionID, part.type, text, ended)
+            if (ended) {
+              parts.delete(part.id)
+              // lo último que respondió acompaña al "listo ✓"
+              if (part.type === "text") {
+                lastSaid.set(part.sessionID, lastSentence(text))
+                cap(lastSaid)
+              }
+            }
+            break
+          }
+          case "message.part.delta": {
+            // OpenCode nuevo manda el texto en trozos
+            const rec = parts.get(p.partID)
+            if (!rec || p.field !== "text" || userMsgs.has(p.messageID)) break
+            rec.text = (rec.text + String(p.delta ?? "")).slice(-2000)
+            thought(rec.sessionID, rec.kind, rec.text)
+            break
+          }
           case "session.status": {
             const status = p.status
             if (status?.type === "busy") {
@@ -396,7 +469,10 @@ export const PixelOfficePlugin = async ({ client, directory }: PluginInput) => {
             if (!seat) break
             seat.task = undefined
             // un error reciente se queda visible hasta el siguiente mensaje
-            if (seat.state !== "error") set(p.sessionID, "idle", seat.parentID ? "subtarea terminada ✓" : "listo ✓")
+            const said = lastSaid.get(p.sessionID)
+            lastSaid.delete(p.sessionID)
+            const done = seat.parentID ? "subtarea terminada ✓" : "listo ✓"
+            if (seat.state !== "error") set(p.sessionID, "idle", said && !HELPER_TITLES.has(titles.get(p.sessionID) ?? "") ? `${done} 💬 ${said}` : done)
             if (seat.parentID) setTimeout(() => void leave(seat), CHILD_LEAVE_MS)
             break
           }
