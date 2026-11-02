@@ -183,7 +183,7 @@ const residents = new Map();
 }
 
 function visibleResidents() {
-  const busy = new Set([...characters.values()].filter((c) => !c.blocked).map((c) => c.role).filter(Boolean));
+  const busy = new Set([...characters.values()].filter((c) => !isHidden(c)).map((c) => c.role).filter(Boolean));
   const out = [];
   for (const [role, r] of residents) {
     if (busy.has(role)) {
@@ -237,9 +237,19 @@ function upsertAgent(agent) {
   // aporta nada y se multiplica (las tareas internas de memoria reintentan
   // cada pocos minutos): no se dibuja. Es lo mismo que hace el plugin nuevo;
   // esto cubre a los OpenCode que aún corren el plugin viejo.
-  c.blocked = String(agent.name ?? "").startsWith("↳") && agent.state === "waiting" && Boolean(quota || /^sin cuota/.test(agent.detail ?? ""));
+  const child = String(agent.name ?? "").startsWith("↳");
+  c.blocked = child && agent.state === "waiting" && Boolean(quota || /^sin cuota/.test(agent.detail ?? ""));
+  // un subagente en error se ve 8 s y luego se oculta (como el plugin nuevo):
+  // las tareas de memoria que OpenCode borra a medio reintento quedan en error
+  // para siempre ("FOREIGN KEY constraint failed" al guardar el mensaje)
+  if (child && agent.state === "error") c.errorSince ??= performance.now();
+  else c.errorSince = undefined;
   if (agent.joinedAt) c.joinedAt = agent.joinedAt;
   if (agent.lastSeen) c.lastSeen = agent.lastSeen;
+}
+
+function isHidden(c) {
+  return c.blocked || (c.errorSince !== undefined && performance.now() - c.errorSince > 8000);
 }
 
 connectOffice({
@@ -404,7 +414,7 @@ function frame(t) {
   const team = visibleResidents();
   for (const c of characters.values()) c.update(dt);
   for (const c of team) c.update(dt);
-  const shown = [...characters.values()].filter((c) => !c.blocked);
+  const shown = [...characters.values()].filter((c) => !isHidden(c));
   const visible = demo && characters.size === 0 ? demo.list() : [...shown, ...team];
   scene.draw({ characters: visible, mode, time: t / 1000 });
   requestAnimationFrame(frame);
