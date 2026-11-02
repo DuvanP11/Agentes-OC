@@ -59,6 +59,7 @@ export class Ficha {
           background: #151922; border: 2px solid #2c3444; border-radius: 8px; z-index: 300;
           display: flex; flex-direction: column; font: 12px ui-monospace, Menlo, monospace; color: #e7e9ee;
           box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+        .ficha[hidden] { display: none; }
         .ficha header { display: block; padding: 12px 14px 10px; border-bottom: 1px solid #262d3b; position: relative; }
         .ficha h2 { display: block; margin: 0; padding-right: 24px; font-size: 16px; }
         .ficha .rol { display: block; color: #8b94a8; margin-top: 2px; }
