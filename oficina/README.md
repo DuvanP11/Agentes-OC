@@ -26,6 +26,11 @@ escritorio, y donde ves en vivo quién está trabajando y en qué.
 - **El equipo vive en la oficina** aunque no lo hayas llamado. Cuando OpenCode
   abre una sesión de un agente, su compañero "se convierte" en la sesión real
   (etiqueta verde) y va a su escritorio.
+- **Clic en un agente → su ficha**: quién es, qué está haciendo ahora, lo que
+  va **pensando** (💭) y **respondiendo** (💬), y el historial de pasos desde
+  que abriste la página. Si está en reposo, dice qué hace y que es simulación.
+  Para pedirle algo directamente, la ficha te da el `@agente` para escribir en
+  OpenCode (botón Copiar).
 - **Nunca muestra secretos**: ni comandos de bash ni patrones de búsqueda; solo
   el nombre del archivo o la descripción corta de la tarea.
 - **Nunca frena a OpenCode**: si la oficina está cerrada, OpenCode funciona
@@ -101,10 +106,12 @@ el código con `pixel-office-opencode`:
   placas con nombre.
 - `main.js`: nombres humanos, equipo residente, escritorio por agente y vida de
   oficina en reposo.
+- `ficha.js` (nuevo): panel del agente al hacer clic, con historial en vivo.
 
 El plugin `plugin/pixel-office.ts` reemplaza al `office-sync.ts` original: un
 personaje por **sesión** y por **subagente**, estados sacados de eventos
-reales de OpenCode (herramientas, permisos, reintentos, errores).
+reales de OpenCode (herramientas, permisos, reintentos, errores) y una frase
+corta de lo que el modelo va pensando o respondiendo.
 
 ## Desinstalar
 
